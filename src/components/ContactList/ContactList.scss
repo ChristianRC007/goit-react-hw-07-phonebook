@@ -77,3 +77,9 @@
   transform: translateX(-100%);
   transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
 }
+
+.contact__loader {
+  position: absolute;
+  left: 360px;
+  top: 360px;
+}

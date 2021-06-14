@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import phonebookActions from '../../redux/phonebook/phonebook-actions';
+import phonebookOperations from '../../redux/phonebook/phonebook-operations';
 import ContactList from './ContactList';
 
 const getFilteredContacts = (allContacts, filter) => {
@@ -10,12 +10,14 @@ const getFilteredContacts = (allContacts, filter) => {
   );
 };
 
-const mapStateToProps = ({ phonebook: { contacts, filter } }) => ({
+const mapStateToProps = ({ phonebook: { contacts, filter, loading } }) => ({
   contacts: getFilteredContacts(contacts, filter),
+  isLoading: loading,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onDeleteContact: id => dispatch(phonebookActions.deleteContact(id)),
+  onDeleteContact: id => dispatch(phonebookOperations.deleteContact(id)),
+  getContacts: () => dispatch(phonebookOperations.getContacts()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
