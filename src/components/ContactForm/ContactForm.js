@@ -16,16 +16,18 @@ class ContactForm extends Component {
   };
 
   handleSubmit = e => {
+    const { allContacts, onSubmit } = this.props;
+
     e.preventDefault();
 
-    if (this.props.allContacts.find(({ name }) => name === this.state.name)) {
+    if (allContacts.find(({ name }) => name === this.state.name)) {
       this.setState({ name: '', number: '', isExist: true });
       const timer = setTimeout(() => {
         this.setState({ isExist: false });
       }, 3000);
       return () => clearTimeout(timer);
     }
-    this.props.onSubmit(this.state);
+    onSubmit(this.state);
     this.setState({ name: '', number: '' });
   };
 

@@ -7,7 +7,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import phonebookReducer from './phonebook/phonebook-reducer';
+import { phonebookReducer } from './phonebook';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -24,8 +24,6 @@ const store = configureStore({
   middleware,
   // devTools: process.env.NODE_ENV === 'development',
 });
-
-// const persistor = persistStore(store);
 
 // eslint-disable-next-line
 export default store;

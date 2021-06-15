@@ -1,10 +1,9 @@
-import React from 'react';
+import { Component } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Loader from 'react-loader-spinner';
 import PropTypes from 'prop-types';
 
 import './ContactList.scss';
-import { Component } from 'react';
 
 class ContactList extends Component {
   componentDidMount() {
@@ -12,10 +11,12 @@ class ContactList extends Component {
   }
 
   render() {
+    const { isLoading, contacts, onDeleteContact } = this.props;
+
     return (
       <>
         <div className="contact__loader">
-          {this.props.isLoading && (
+          {isLoading && (
             <Loader
               type="Bars"
               color="#000000"
@@ -26,7 +27,7 @@ class ContactList extends Component {
           )}
         </div>
         <TransitionGroup component="ul" className="contact-list">
-          {this.props.contacts.map(({ id, name, number }) => (
+          {contacts.map(({ id, name, number }) => (
             <CSSTransition
               key={id}
               timeout={250}
@@ -36,10 +37,7 @@ class ContactList extends Component {
               <li className="contact-list__item" key={id}>
                 <p className="contact-list__item__name">{name}</p>
                 <p className="contact-list__item__number">{number}</p>
-                <button
-                  type="button"
-                  onClick={() => this.props.onDeleteContact(id)}
-                >
+                <button type="button" onClick={() => onDeleteContact(id)}>
                   <svg
                     height="365.696pt"
                     viewBox="0 0 365.696 365.696"

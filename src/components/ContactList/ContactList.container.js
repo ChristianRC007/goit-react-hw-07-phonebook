@@ -1,18 +1,14 @@
 import { connect } from 'react-redux';
-import phonebookOperations from '../../redux/phonebook/phonebook-operations';
+import {
+  phonebookOperations,
+  getLoading,
+  getFilteredContacts,
+} from '../../redux/phonebook';
 import ContactList from './ContactList';
 
-const getFilteredContacts = (allContacts, filter) => {
-  const normalizedContact = filter.toLowerCase();
-
-  return allContacts.filter(contact =>
-    contact.name.toLowerCase().includes(normalizedContact),
-  );
-};
-
-const mapStateToProps = ({ phonebook: { contacts, filter, loading } }) => ({
-  contacts: getFilteredContacts(contacts, filter),
-  isLoading: loading,
+const mapStateToProps = state => ({
+  contacts: getFilteredContacts(state),
+  isLoading: getLoading(state),
 });
 
 const mapDispatchToProps = dispatch => ({
